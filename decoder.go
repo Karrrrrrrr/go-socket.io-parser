@@ -9,13 +9,16 @@ import (
 type Decoder struct {
 }
 
-func (d Decoder) Decode(data []any) (pack *Packet, err error) {
+func (d *Decoder) Decode(data []any) (pack *Packet, err error) {
 	if len(data) == 0 {
 		return nil, errors.New("error")
 	}
 	if s, ok := data[0].(string); len(data) == 1 && ok {
 		return d.decodeAsString(s)
 	}
+
+	// todo decodeAsBinary()
+
 	return nil, errors.New("unknown error")
 
 	//for i := range data {
@@ -23,7 +26,7 @@ func (d Decoder) Decode(data []any) (pack *Packet, err error) {
 	//}
 }
 
-func (d Decoder) decodeAsString(s string) (*Packet, error) {
+func (d *Decoder) decodeAsString(s string) (*Packet, error) {
 	var err error
 	var i = 0
 	var p = Packet{}
@@ -90,6 +93,11 @@ func (d Decoder) decodeAsString(s string) (*Packet, error) {
 
 func isDigit(b byte) bool {
 	return b <= '9' && b >= '0'
+}
+
+// todo
+func (d *Decoder) decodeAsBinary() (*Packet, error) {
+	return nil, nil
 }
 
 /*
