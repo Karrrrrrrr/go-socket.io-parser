@@ -29,7 +29,7 @@ type Packet struct {
 	Attachments int
 }
 
-func (e *Encoder) Encode(obj Packet) ([]byte, error) {
+func (e *Encoder) Encode(obj *Packet) ([]byte, error) {
 	if obj.Type == EVENT || obj.Type == ACK {
 
 	}
@@ -50,7 +50,7 @@ func (e *Encoder) Encode(obj Packet) ([]byte, error) {
 	//}
 }
 
-func (e *Encoder) encodeAsString(obj Packet) ([]byte, error) {
+func (e *Encoder) encodeAsString(obj *Packet) ([]byte, error) {
 	var buf = bytes.NewBufferString("")
 	buf.WriteString(strconv.Itoa(int(obj.Type)))
 
@@ -72,8 +72,10 @@ func (e *Encoder) encodeAsString(obj Packet) ([]byte, error) {
 	}
 	return buf.Bytes(), nil
 }
-func (e *Encoder) encodeAsBinary() {
 
+// todo
+func (e *Encoder) encodeAsBinary(obj *Packet) ([]byte, error) {
+	return nil, nil
 }
 
 /*
